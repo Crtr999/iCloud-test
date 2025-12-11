@@ -45,7 +45,7 @@ class RemarkableSync:
         else:
             logger.warning(f"Config file not found at {self.config_path}, using defaults")
             return {
-                'icloud_path': '~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable',
+                'icloud_path': '~/Library/Mobile Documents/com~apple~CloudDocs/Remarkable Sync',
                 'sync_format': 'pdf',  # pdf or epub
                 'rmapi_path': 'rmapi',  # path to rmapi binary
                 'exclude_folders': []

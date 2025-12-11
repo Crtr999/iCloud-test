@@ -54,12 +54,12 @@ If you prefer to set things up manually, see [REMARKABLE_SYNC_SETUP.md](REMARKAB
 
 Once installed, files sync automatically every 15 minutes to:
 ```
-~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable/
+~/Library/Mobile Documents/com~apple~CloudDocs/Remarkable Sync/
 ```
 
 Access your files from:
-- **Finder:** Go → iCloud Drive → reMarkable folder
-- **iPhone/iPad:** Files app → iCloud Drive → reMarkable folder
+- **Finder:** Go → iCloud Drive → Remarkable Sync folder
+- **iPhone/iPad:** Files app → iCloud Drive → Remarkable Sync folder
 - **Web:** iCloud.com → Files section
 
 ### Manual Sync
@@ -80,7 +80,7 @@ Edit `~/remarkable_sync_config.json` to customize:
 
 ```json
 {
-  "icloud_path": "~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable",
+  "icloud_path": "~/Library/Mobile Documents/com~apple~CloudDocs/Remarkable Sync",
   "sync_format": "pdf",
   "rmapi_path": "rmapi",
   "exclude_folders": [],

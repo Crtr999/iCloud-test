@@ -60,7 +60,7 @@ cp remarkable_sync_config.json ~/remarkable_sync_config.json
 
 ```json
 {
-  "icloud_path": "~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable",
+  "icloud_path": "~/Library/Mobile Documents/com~apple~CloudDocs/Remarkable Sync",
   "sync_format": "pdf",
   "rmapi_path": "rmapi",
   "exclude_folders": [],
@@ -98,7 +98,7 @@ python3 remarkable_sync.py --force
 
 Check your iCloud Drive folder to verify files are syncing:
 ```bash
-open ~/Library/Mobile\ Documents/com~apple~CloudDocs/reMarkable
+open ~/Library/Mobile\ Documents/com~apple~CloudDocs/Remarkable\ Sync
 ```
 
 ## Step 4: Set Up Automatic Syncing
@@ -223,11 +223,11 @@ Once set up with launchd or cron, the sync will run automatically at your config
 
 ## File Organization
 
-Files are synced to: `~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable/`
+Files are synced to: `~/Library/Mobile Documents/com~apple~CloudDocs/Remarkable Sync/`
 
 You can access these files:
-- In Finder: Go > iCloud Drive > reMarkable folder
-- On iPhone/iPad: Files app > iCloud Drive > reMarkable folder
+- In Finder: Go > iCloud Drive > Remarkable Sync folder
+- On iPhone/iPad: Files app > iCloud Drive > Remarkable Sync folder
 - On iCloud.com: Files section
 
 ## Advanced Configuration
@@ -271,7 +271,7 @@ rm ~/remarkable_sync.log
 
 3. Optionally remove synced files:
 ```bash
-rm -rf ~/Library/Mobile\ Documents/com~apple~CloudDocs/reMarkable
+rm -rf ~/Library/Mobile\ Documents/com~apple~CloudDocs/Remarkable\ Sync
 ```
 
 ## Support
