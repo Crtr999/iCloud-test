@@ -1,47 +1,44 @@
-# iCloud-test
-Icloud Test
-You are tasked with systematically reading EVERY SINGLE FILE in the iCloud-test folder
+# reMarkable to iCloud Sync
 
-# CRITICAL REQUIREMENTS - NO EXCEPTIONS:
+Automatically sync your reMarkable documents to iCloud Drive. Set it up once, then forget about it!
 
-1. **Find ALL files** - Use bash to list every file in the directory (excluding .zip files)
+## Quick Start
 
-2. **Read EVERY file COMPLETELY** - For each file:
-   - First, count total lines using `wc -l`
-   - If file is small (under 2000 lines), read it completely in one Read call
-   - If file is large (2000+ lines), you MUST read it in chunks:
-     * Calculate how many chunks needed (file has a ~25,000 token limit per read, approximately 1200-1500 lines safely)
-     * Read chunk 1: lines 1-1200
-     * Read chunk 2: lines 1201-2400
-     * Read chunk 3: lines 2401-3600
-     * Continue until you reach the LAST line of the file
-     * DO NOT SKIP ANY CHUNKS
-     * DO NOT STOP if you get a token error - reduce chunk size to 800 lines and retry
+**Read the full instructions here: [INSTRUCTIONS.md](INSTRUCTIONS.md)**
 
-3. **Track your progress** - Maintain a detailed log showing:
-   - Each file name
-   - Total lines in that file
-   - How many chunks you read
-   - Line ranges for each chunk (e.g., "Read lines 1-1200, 1201-2400, 2401-3600...")
-   - Confirmation that you reached the end of each file
+### TL;DR
 
-4. **After reading everything** - Analyze ALL content together and identify:
-   [YOUR SPECIFIC ANALYSIS TASK - e.g., "the most likely essay topics for a final exam"]
+1. Open Terminal
+2. Navigate to this folder
+3. Run: `bash setup.sh`
+4. Follow the prompts to connect your reMarkable
+5. Done! Your documents will sync to iCloud every hour automatically
 
-# VERIFICATION REQUIREMENT:
+## What You Get
 
-At the end of your response, include a table:
+- ✅ Automatic syncing every hour (customizable)
+- ✅ All reMarkable documents in your iCloud Drive
+- ✅ Folder structure preserved
+- ✅ Works in the background - no manual work needed
+- ✅ Syncs to all your Apple devices via iCloud
 
-| File Name | Total Lines | Chunks Read | Line Ranges | Status |
-|-----------|-------------|-------------|-------------|--------|
-| file1.md  | 500         | 1           | 1-500       | ✅ Complete |
-| file2.md  | 10954       | 9           | 1-1200, 1201-2400... | ✅ Complete |
+## Files
 
-Every file MUST show "✅ Complete" - NO EXCEPTIONS.
+- `setup.sh` - One-time setup script (run this first!)
+- `remarkable_sync.py` - The sync script (runs automatically)
+- `INSTRUCTIONS.md` - Detailed setup guide with troubleshooting
 
-# WHAT TO RETURN TO ME:
+## Your Synced Files Location
 
-1. Your verification table proving you read everything
-2. A confirmation that you are ready to speak to the specific contents of the folder.
+Your reMarkable documents will appear in:
 
-DO NOT STOP until you have read every single line of every single file. If you encounter any errors, adjust your approach and continue. COMPLETE THIS TASK FULLY.
+**iCloud Drive > Remarkable sync**
+
+You can access this from:
+- Finder sidebar (iCloud Drive)
+- iCloud.com
+- Any Mac/iPhone/iPad signed into your iCloud account
+
+---
+
+**Need help?** See [INSTRUCTIONS.md](INSTRUCTIONS.md) for detailed setup and troubleshooting.
