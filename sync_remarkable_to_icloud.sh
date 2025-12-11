@@ -4,8 +4,12 @@
 # No API, no authentication - just copies files
 #
 
-# Where reMarkable desktop app stores files
-REMARKABLE_DIR="$HOME/.local/share/remarkable/desktop"
+# Possible locations for reMarkable Mac app files
+POSSIBLE_DIRS=(
+    "$HOME/Library/Application Support/remarkable/desktop"
+    "$HOME/.local/share/remarkable/desktop"
+    "$HOME/Library/Containers/com.remarkable.desktop/Data/Library/Application Support/remarkable"
+)
 
 # iCloud destination
 ICLOUD_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Remarkable Sync"
@@ -13,11 +17,27 @@ ICLOUD_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Remarkable Sync"
 # Create iCloud folder if it doesn't exist
 mkdir -p "$ICLOUD_DIR"
 
-# Check if reMarkable desktop folder exists
-if [ ! -d "$REMARKABLE_DIR" ]; then
-    echo "❌ reMarkable desktop app folder not found!"
-    echo "Please install the reMarkable desktop app from:"
-    echo "https://remarkable.com/desktop"
+# Find the reMarkable directory
+REMARKABLE_DIR=""
+for DIR in "${POSSIBLE_DIRS[@]}"; do
+    if [ -d "$DIR" ]; then
+        REMARKABLE_DIR="$DIR"
+        echo "📁 Found reMarkable files at: $DIR"
+        break
+    fi
+done
+
+# Check if we found it
+if [ -z "$REMARKABLE_DIR" ]; then
+    echo "❌ reMarkable Mac app folder not found!"
+    echo ""
+    echo "Searched in:"
+    for DIR in "${POSSIBLE_DIRS[@]}"; do
+        echo "  - $DIR"
+    done
+    echo ""
+    echo "Please make sure the reMarkable Mac app is installed and has synced at least once."
+    echo "Download from: https://remarkable.com"
     exit 1
 fi
 
