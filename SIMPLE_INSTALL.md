@@ -2,21 +2,22 @@
 
 ## Super Simple 3-Step Setup
 
-### Step 1: Install Python Package
+### Step 1: Uninstall Old Package & Install New One
 
 Open Terminal and run:
 
 ```bash
-pip3 install rmapy
+pip3 uninstall rmapy
+pip3 install rmcl
 ```
 
-That's it. No binaries, no downloads, just one Python package.
+That's it. No binaries, no downloads, just one Python package (rmcl is the actively maintained version).
 
 ### Step 2: Run First-Time Setup
 
 ```bash
 cd ~/iCloud-test
-python3 remarkable_sync_v2.py --setup
+python3 remarkable_sync_v3.py --setup
 ```
 
 This will:
@@ -28,7 +29,7 @@ This will:
 ### Step 3: Sync Your Files
 
 ```bash
-python3 remarkable_sync_v2.py
+python3 remarkable_sync_v3.py
 ```
 
 Your files will download to:
@@ -66,17 +67,17 @@ Done! Now it syncs automatically every 15 minutes.
 
 **Sync now:**
 ```bash
-python3 remarkable_sync_v2.py
+python3 remarkable_sync_v3.py
 ```
 
 **Force re-download everything:**
 ```bash
-python3 remarkable_sync_v2.py --force
+python3 remarkable_sync_v3.py --force
 ```
 
 **Re-authenticate (if token expires):**
 ```bash
-python3 remarkable_sync_v2.py --setup
+python3 remarkable_sync_v3.py --setup
 ```
 
 **View logs:**
@@ -86,9 +87,9 @@ tail -f ~/remarkable_sync.log
 
 ## Troubleshooting
 
-**"rmapy not installed" error:**
+**"rmcl not installed" error:**
 ```bash
-pip3 install rmapy
+pip3 install rmcl
 ```
 
 **Authentication fails:**
@@ -121,5 +122,5 @@ rm ~/remarkable_sync.log
 rm ~/remarkable_sync_config.json
 
 # Optionally remove Python package
-pip3 uninstall rmapy
+pip3 uninstall rmcl
 ```

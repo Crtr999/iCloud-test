@@ -8,7 +8,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/usr/bin/python3</string>
-        <string>/Users/carterlaborde/iCloud-test/remarkable_sync_v2.py</string>
+        <string>/Users/carterlaborde/iCloud-test/remarkable_sync_v3.py</string>
     </array>
 
     <key>StartInterval</key>
