@@ -85,7 +85,8 @@ class RemarkableSync:
                 logger.info("Using stored authentication token...")
                 with open(self.token_file, 'r') as f:
                     token = f.read().strip()
-                await self.client.register(token=token)
+                self.client.device_token = token
+                await self.client.renew_token()
                 logger.info("✓ Authentication successful (using stored token)")
                 return True
             except Exception as e:
@@ -106,11 +107,11 @@ class RemarkableSync:
         code = input("Enter one-time code: ").strip()
 
         try:
-            await self.client.register(code)
+            await self.client.register_device(code)
             logger.info("✓ Device registered successfully!")
 
             # Save the token for future use
-            token = self.client.token
+            token = self.client.device_token
             with open(self.token_file, 'w') as f:
                 f.write(token)
             os.chmod(self.token_file, 0o600)  # Secure the token file
