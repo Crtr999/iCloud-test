@@ -1,47 +1,147 @@
-# iCloud-test
-Icloud Test
-You are tasked with systematically reading EVERY SINGLE FILE in the iCloud-test folder
+# reMarkable to iCloud Drive Sync
 
-# CRITICAL REQUIREMENTS - NO EXCEPTIONS:
+Automatically sync your reMarkable tablet files to iCloud Drive for easy access across all your Apple devices.
 
-1. **Find ALL files** - Use bash to list every file in the directory (excluding .zip files)
+## Features
 
-2. **Read EVERY file COMPLETELY** - For each file:
-   - First, count total lines using `wc -l`
-   - If file is small (under 2000 lines), read it completely in one Read call
-   - If file is large (2000+ lines), you MUST read it in chunks:
-     * Calculate how many chunks needed (file has a ~25,000 token limit per read, approximately 1200-1500 lines safely)
-     * Read chunk 1: lines 1-1200
-     * Read chunk 2: lines 1201-2400
-     * Read chunk 3: lines 2401-3600
-     * Continue until you reach the LAST line of the file
-     * DO NOT SKIP ANY CHUNKS
-     * DO NOT STOP if you get a token error - reduce chunk size to 800 lines and retry
+- 🔄 Automatic syncing from reMarkable to iCloud Drive
+- 📄 Export as PDF or ePub format
+- ⏱️ Configurable sync intervals
+- 📁 Folder exclusion support
+- 📊 Sync state tracking to avoid redundant downloads
+- 🚀 Easy installation with automated setup script
 
-3. **Track your progress** - Maintain a detailed log showing:
-   - Each file name
-   - Total lines in that file
-   - How many chunks you read
-   - Line ranges for each chunk (e.g., "Read lines 1-1200, 1201-2400, 2401-3600...")
-   - Confirmation that you reached the end of each file
+## Quick Start
 
-4. **After reading everything** - Analyze ALL content together and identify:
-   [YOUR SPECIFIC ANALYSIS TASK - e.g., "the most likely essay topics for a final exam"]
+### Prerequisites
 
-# VERIFICATION REQUIREMENT:
+- macOS (required for iCloud Drive)
+- Python 3.6+
+- reMarkable tablet with an active account
+- iCloud Drive enabled
 
-At the end of your response, include a table:
+### Installation
 
-| File Name | Total Lines | Chunks Read | Line Ranges | Status |
-|-----------|-------------|-------------|-------------|--------|
-| file1.md  | 500         | 1           | 1-500       | ✅ Complete |
-| file2.md  | 10954       | 9           | 1-1200, 1201-2400... | ✅ Complete |
+1. **Clone this repository:**
+   ```bash
+   git clone <repository-url>
+   cd iCloud-test
+   ```
 
-Every file MUST show "✅ Complete" - NO EXCEPTIONS.
+2. **Run the installation script:**
+   ```bash
+   chmod +x install_sync.sh
+   ./install_sync.sh
+   ```
 
-# WHAT TO RETURN TO ME:
+   The script will:
+   - Check prerequisites
+   - Install rmapi (if needed)
+   - Configure the sync settings
+   - Authenticate with your reMarkable account
+   - Set up automatic syncing
+   - Run an initial test sync
 
-1. Your verification table proving you read everything
-2. A confirmation that you are ready to speak to the specific contents of the folder.
+3. **Done!** Your reMarkable files will now sync automatically every 15 minutes.
 
-DO NOT STOP until you have read every single line of every single file. If you encounter any errors, adjust your approach and continue. COMPLETE THIS TASK FULLY.
+### Manual Setup
+
+If you prefer to set things up manually, see [REMARKABLE_SYNC_SETUP.md](REMARKABLE_SYNC_SETUP.md) for detailed instructions.
+
+## Usage
+
+### Automatic Sync
+
+Once installed, files sync automatically every 15 minutes to:
+```
+~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable/
+```
+
+Access your files from:
+- **Finder:** Go → iCloud Drive → reMarkable folder
+- **iPhone/iPad:** Files app → iCloud Drive → reMarkable folder
+- **Web:** iCloud.com → Files section
+
+### Manual Sync
+
+Run a manual sync anytime:
+```bash
+python3 remarkable_sync.py
+```
+
+Force re-sync all files:
+```bash
+python3 remarkable_sync.py --force
+```
+
+### Configuration
+
+Edit `~/remarkable_sync_config.json` to customize:
+
+```json
+{
+  "icloud_path": "~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable",
+  "sync_format": "pdf",
+  "rmapi_path": "rmapi",
+  "exclude_folders": [],
+  "sync_interval_minutes": 15
+}
+```
+
+## Monitoring
+
+View sync logs:
+```bash
+tail -f ~/remarkable_sync.log
+```
+
+Check sync status:
+```bash
+cat ~/.remarkable_sync_state.json
+```
+
+## Troubleshooting
+
+See [REMARKABLE_SYNC_SETUP.md](REMARKABLE_SYNC_SETUP.md#troubleshooting) for common issues and solutions.
+
+## Files
+
+- `remarkable_sync.py` - Main sync script
+- `remarkable_sync_config.json` - Configuration template
+- `com.remarkable.sync.plist` - macOS LaunchAgent configuration
+- `install_sync.sh` - Automated installation script
+- `REMARKABLE_SYNC_SETUP.md` - Detailed setup and usage guide
+
+## How It Works
+
+1. The script uses [rmapi](https://github.com/juruen/rmapi) to access your reMarkable cloud
+2. It lists all documents on your reMarkable
+3. New or modified files are downloaded and converted to PDF/ePub
+4. Files are saved to your iCloud Drive folder
+5. Sync state is tracked to avoid redundant downloads
+6. The process runs automatically via macOS LaunchAgent
+
+## Limitations
+
+- **One-way sync only:** Changes sync FROM reMarkable TO iCloud (not bidirectional)
+- **macOS only:** Requires iCloud Drive (macOS/iOS)
+- **Export format:** Files are converted to PDF/ePub, not native reMarkable format
+- **No live sync:** Files sync at configured intervals, not in real-time
+
+## Dependencies
+
+- [rmapi](https://github.com/juruen/rmapi) - Command-line tool for reMarkable cloud access
+- Python 3.6+ (standard library only, no additional packages required)
+
+## License
+
+[Your License]
+
+## Contributing
+
+Contributions welcome! Please open an issue or submit a pull request.
+
+## Support
+
+- For rmapi issues: https://github.com/juruen/rmapi
+- For reMarkable support: https://support.remarkable.com

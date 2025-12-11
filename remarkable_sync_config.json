@@ -1,0 +1,7 @@
+{
+  "icloud_path": "~/Library/Mobile Documents/com~apple~CloudDocs/reMarkable",
+  "sync_format": "pdf",
+  "rmapi_path": "rmapi",
+  "exclude_folders": [],
+  "sync_interval_minutes": 15
+}
